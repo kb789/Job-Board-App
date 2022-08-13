@@ -16,7 +16,7 @@ export default function NewJob() {
 	if (!session || !session.user) return null;
 
 	const submitJob = async (event) => {
-		console.log("called")
+		
 		event.preventDefault();
 		
 		const res = await fetch('/api/addJob', {

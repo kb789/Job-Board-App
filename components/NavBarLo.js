@@ -1,3 +1,5 @@
+import { signOut } from "next-auth/react";
+
 export default function NavBar() {
     return (
 <nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
