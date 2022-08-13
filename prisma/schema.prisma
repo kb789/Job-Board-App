@@ -57,10 +57,12 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+  companyName   String?    @default("unknown")
+  userName      String?    @default("unknown")
   accounts      Account[]
   sessions      Session[]
   Jobs Job[]
-  company Boolean    @default(true)
+  
 }
 
 model VerificationToken {

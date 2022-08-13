@@ -1,17 +1,14 @@
 import prisma from 'lib/prisma'
-import { getSession } from 'next-auth/react'
+import { getSession } from 'next-auth/react';
 
 export default async function handler(req, res) {
+ 
    if (req.method !== 'POST' && req.method !== 'DELETE') {
       return res.status(501).end()
     }
    
-    const session = await getSession({ req })
-    const user = await prisma.user.findUnique({
-      where: {
-        email: session.user.email,
-      },
-    })
+  const session = await getSession( {req});
+  console.log(session.userid)
 
     if (req.method === 'POST') {
       await prisma.job.create({
@@ -22,7 +19,7 @@ export default async function handler(req, res) {
           salary: req.body.salary,
          
           user: {
-            connect: { id: user.id },
+            connect: { id: session.userid },
           },
         },
       })

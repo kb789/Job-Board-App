@@ -4,12 +4,11 @@ import NewJob from 'components/NewJob';
 import NavBar from 'components/NavBar';
 import Loading from 'components/Loading';
 
-export default function Home() {
+export default function JobHome() {
     const { data: session, status } = useSession();
     const loading = status === 'loading';
     const router = useRouter();
   
-    
     if (loading) {
       return (
        <Loading/>
@@ -19,11 +18,10 @@ export default function Home() {
     if (!session) {
       router.push('/');
     }
-    console.log(session);
     return (
         <>
        <NavBar/>
-           <NewJob/>
+           <div>Individual users jobs go here</div>
         </>
              
       );

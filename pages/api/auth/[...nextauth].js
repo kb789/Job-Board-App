@@ -25,5 +25,15 @@ export default NextAuth({
     version: "2.0", // opt-in to Twitter OAuth 2.0
   })
   ],
+  callbacks: {
+    async session({ session, token, user }) {
+      // Send properties to the client, like an access_token from a provider.
+      session.userid = user.id;
+      session.company = user.companyName;
+      session.userName = user.userName;
+      return session
+    },
+   
+  }
 })
 
