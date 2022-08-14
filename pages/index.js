@@ -8,10 +8,10 @@ import prisma from 'lib/prisma'
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { getJobs } from './api/jobs';
+import hiring from '/public/hiring.png'
+import Link from 'next/link'
 
-
-
-export default function Home({ }) {
+export default function Home({ jobs }) {
  
     const { data: session, status } = useSession();
     const router = useRouter();
@@ -40,20 +40,28 @@ export default function Home({ }) {
    
     
     return (
+     
       <div>
     <NavBarLo/>
-      <div className='mt-10'>
-        
-        <div className='text-center p-4 border m-4'>
-          <h2 className='mb-10'>Join the conversation!</h2>
-          <a
-            className='border px-8 py-2 mt-5 font-bold rounded-full color-accent-contrast bg-color-accent hover:bg-color-accent-hover-darker'
-            href='/api/auth/signin'
-          >
-            login
-          </a>
-        </div>
-        </div>
+    <div class="mx-auto text-center max-w-3xl px-10">
+      
+    <Image src={hiring}
+    
+    width={320} height={180}/>
+    
+    {jobs.map((job)=> {
+    return (
+		<div class="mb-10 px-6 pt-2 pb-4 bg-white border border-gray-200 rounded-2xl shadow-md flex flex-col">
+      <p class="mb-3 text-gray-400 text-sm">{job.location}</p>
+  
+      <h3 class="mb-2 text-2xl font-semibold text-gray-900">{job.title}</h3>
+     
+      <Link href={`/job/${job.id}`}>
+      <p class="mt-4 text-teal-500 hover:text-teal-900">APPLY NOW</p>
+      </Link>
+</div>
+    )})}
+		</div>
       </div>
     )
     

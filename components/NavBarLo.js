@@ -1,4 +1,4 @@
-import { signOut } from "next-auth/react";
+import { signIn } from "next-auth/react";
 
 export default function NavBar() {
     return (
@@ -11,7 +11,9 @@ export default function NavBar() {
 
     <span class="font-semibold text-xl tracking-tight pl-1">Job Board</span>
   </div>
- 
+  <div>
+      <a  onClick={() => signIn({ callbackUrl: '/api/auth/signin' })} class="inline-block text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">SIGN IN TO APPLY OR LIST A JOB</a>
+    </div>
 </nav>
     )
 }
