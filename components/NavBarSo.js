@@ -1,4 +1,6 @@
 import { signOut } from "next-auth/react";
+import { signOut } from "next-auth/react";
+
 
 export default function NavBarSo() {
     return (
