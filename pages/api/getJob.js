@@ -10,3 +10,5 @@ export const getJob = async (id, prisma) => {
   
     return job
   }
+
+  

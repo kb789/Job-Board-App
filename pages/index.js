@@ -72,7 +72,7 @@ export async function getServerSideProps() {
   
   let init_jobs = await getJobs(prisma);
   let jobs = JSON.parse(JSON.stringify(init_jobs));
-  console.log(jobs);
+  
     return {
       props: { 
         jobs
