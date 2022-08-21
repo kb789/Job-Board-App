@@ -2,24 +2,26 @@ import { getJob } from '../api/getJob';
 import prisma from 'lib/prisma';
 import Link from 'next/link';
 import { useState } from 'react';
-
+import { useRouter } from 'next/router';
 
 export default function Apply({job}) {
+  const router = useRouter();
     const [pdf, setPdf] = useState('');
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
     const [address, setAddress] = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
-    const [resumeurl, setResumeurl] = useState('');
     const uploadPhoto = async (event) => {
       event.preventDefault();
       const file = pdf;
       const filename = encodeURIComponent(file.name);
       const res = await fetch(`/api/upload-url?file=${filename}`);
       const { url, fields } = await res.json();
-      console.log(url);
-      console.log(filename);
+      
+      let imageurl=url+filename;
+      
+     
       const formData = new FormData();
   
       Object.entries({ ...fields, file }).forEach(([key, value]) => {
@@ -32,10 +34,28 @@ export default function Apply({job}) {
       });
   
       if (upload.ok) {
-        console.log('Uploaded successfully!');
+        const res = await fetch('/api/addApplication', {
+          body: JSON.stringify({
+          firstname: firstname,
+          lastname: lastname,
+          address: address,
+          phone: phone,
+          email: email,
+          resumeurl: imageurl,
+          jobid: job.id,
+
+          }),
+          headers: {
+          'Content-Type': 'application/json',
+          },
+          method: 'POST',
+        });
+        
+        
       } else {
         console.error('Upload failed.');
       }
+      router.reload(window.location.pathname);
     };
 
    
