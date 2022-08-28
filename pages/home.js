@@ -37,7 +37,7 @@ export default function Home({ jobs, applications }) {
    Welcome, {session.company}
         </h1>
         <h2 class="text-center text-xl mb-10 font-extrabold tracking-tight text-gray-900 pt-10">
-   
+          Jobs's You've Posted
         </h2>
     
     {jobs.map((job)=> {
@@ -59,12 +59,17 @@ export default function Home({ jobs, applications }) {
   
       {applications.map((app)=> {
     return (
+      job.id === app.jobId &&   (
       <Link href={app.resumeurl}>
       <p class="mt-2 text-teal-500 hover:text-teal-900">{app.lastname}, {app.firstname}</p>
       </Link>
+      )
     )})}
 </div>)
     )})}
+
+
+    
 		</div>
       </div>
     )

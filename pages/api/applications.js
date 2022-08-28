@@ -8,7 +8,10 @@ export const getApplications = async (prisma) => {
               },
             ],
            
-    
+            include: {
+              user: true,
+              job: true,
+            },
         })
     
     )
