@@ -3,6 +3,7 @@ import prisma from 'lib/prisma';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import Loading from 'components/Loading';
 
 export default function Apply({job}) {
   const router = useRouter();
@@ -12,10 +13,13 @@ export default function Apply({job}) {
     const [address, setAddress] = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
+    const [loading, setLoading] = useState(false)
     const uploadPhoto = async (event) => {
       event.preventDefault();
+      setLoading(true);
       const file = pdf;
-      const filename = encodeURIComponent(file.name);
+      const filename = Date.now().toString()+encodeURIComponent(file.name);
+     
       const res = await fetch(`/api/upload-url?file=${filename}`);
       const { url, fields } = await res.json();
       
@@ -50,15 +54,21 @@ export default function Apply({job}) {
           },
           method: 'POST',
         });
-        
-        
+        //setLoading(false);
+        router.push("/");
       } else {
         console.error('Upload failed.');
       }
-      router.reload(window.location.pathname);
+     
     };
 
-   
+    
+    if (loading) {
+      return (
+       <Loading/>
+      );
+  
+    }
   
     return (
       <>
@@ -74,8 +84,8 @@ export default function Apply({job}) {
           </div>
         <form onSubmit={uploadPhoto}>
             <div className="flex flex-col mb-4">
-                <label class="mb-2 font-bold text-lg text-gray-900" htmlFor="first_name">First Name</label>
-                <input class="border py-2 px-3 text-grey-800" type="text" name="first_name" id="first_name" onChange={(e) => setFirstname(e.target.value)}></input>
+                <label className="mb-2 font-bold text-lg text-gray-900" htmlFor="first_name">First Name</label>
+                <input className="border py-2 px-3 text-grey-800" type="text" name="first_name" id="first_name" onChange={(e) => setFirstname(e.target.value)}></input>
             </div>
             <div className="flex flex-col mb-4">
                 <label className="mb-2 font-bold text-lg text-gray-900" htmlFor="last_name">Last Name</label>

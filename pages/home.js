@@ -36,7 +36,7 @@ export default function Home({ jobs, applications }) {
     <h1 class="text-center text-3xl mb-10 font-extrabold tracking-tight text-gray-900 pt-10">
    Welcome, {session.company}
         </h1>
-        <h2 class="text-center text-xl mb-10 font-extrabold tracking-tight text-gray-900 pt-10">
+        <h2 class="text-center text-2xl mb-10 font-bold tracking-tight text-gray-900 pt-10">
           Jobs's You've Posted
         </h2>
     

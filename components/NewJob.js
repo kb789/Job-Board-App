@@ -32,7 +32,7 @@ export default function NewJob() {
 		  method: 'POST',
 		});
 		
-		router.reload(window.location.pathname);
+		router.push('/');
 	  };
 
 
@@ -41,32 +41,32 @@ export default function NewJob() {
       
 
 	
-		<div class="container mx-auto">
-			<div class="flex justify-center px-6 my-12">
+		<div className="container mx-auto">
+			<div className="flex justify-center px-6 my-12">
 				
-				<div class="w-full xl:w-3/4 lg:w-11/12 flex">
+				<div className="w-full xl:w-3/4 lg:w-11/12 flex">
 			
 					<div
-						class="w-full h-auto  hidden lg:block lg:w-5/12 bg-cover rounded-l-lg">
+						className="w-full h-auto  hidden lg:block lg:w-5/12 bg-cover rounded-l-lg">
 							<Image src={paper}/></div>
 					
-					<div class="w-full lg:w-7/12 bg-white p-5 rounded-lg lg:rounded-l-none">
-						<h3 class="pt-4 text-2xl text-center">Post a job listing!</h3>
-						<form class="px-8 pt-6 pb-8 mb-4 bg-white rounded" onSubmit={submitJob}>
-                        <div class="mb-4">
-                            <label class="block mb-2 text-sm font-bold text-gray-700">
+					<div className="w-full lg:w-7/12 bg-white p-5 rounded-lg lg:rounded-l-none">
+						<h3 className="pt-4 text-2xl text-center">Post a job listing!</h3>
+						<form className="px-8 pt-6 pb-8 mb-4 bg-white rounded" onSubmit={submitJob}>
+                        <div className="mb-4">
+                            <label className="block mb-2 text-sm font-bold text-gray-700">
 										Title
 									</label>
 									<input
-										class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+										className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
 										name="title"
 										type="text"
 										placeholder="Job Title"
 										onChange={(e)=>setTitle(e.target.value)}
 									/>
 							</div>
-                        <div class="mb-4">
-                            <label class="block mb-2 text-sm font-bold text-gray-700">
+                        <div className="mb-4">
+                            <label className="block mb-2 text-sm font-bold text-gray-700">
 										Description
 									</label>
 									<textarea
@@ -78,25 +78,25 @@ export default function NewJob() {
             onChange={(e) => setDescription(e.target.value)}
           />
 							</div>
-							<div class="mb-4 md:flex md:justify-between">
-								<div class="mb-4 md:mr-2 md:mb-0">
-									<label class="block mb-2 text-sm font-bold text-gray-700">
+							<div className="mb-4 md:flex md:justify-between">
+								<div className="mb-4 md:mr-2 md:mb-0">
+									<label className="block mb-2 text-sm font-bold text-gray-700">
 										Location
 									</label>
 									<input
-										class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+										className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
 										name="location"
 										type="text"
 										placeholder="Job Location"
 										onChange={(e) => setLocation(e.target.value)}
 									/>
 								</div>
-								<div class="md:ml-2">
-									<label class="block mb-2 text-sm font-bold text-gray-700">
+								<div className="md:ml-2">
+									<label className="block mb-2 text-sm font-bold text-gray-700">
 										Salary
 									</label>
 									<input
-										class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+										className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
 										name="salary"
 										type="text"
 										placeholder="Starting Salary"
@@ -105,20 +105,20 @@ export default function NewJob() {
 								</div>
 							</div>
 							
-							<div class="mb-10">
-                            <label class="block mb-2 text-sm font-bold text-gray-700">
+							<div className="mb-10">
+                            <label className="block mb-2 text-sm font-bold text-gray-700">
 										Make active?
 									</label>
 									<input
-										class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+										className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
 										name="active"
 										type="text"
 										placeholder="Make Job Description Active?"
 									/>
 							</div>
-							<div class="mb-6 text-center">
+							<div className="mb-6 text-center">
 								<button
-									class="w-full px-4 py-2 font-bold text-white bg-slate-400 rounded-full hover:bg-slate-600 focus:outline-none focus:shadow-outline"
+									className="w-full px-4 py-2 font-bold text-white bg-slate-400 rounded-full hover:bg-slate-600 focus:outline-none focus:shadow-outline"
 									type="submit"
 								>
 									Post Job

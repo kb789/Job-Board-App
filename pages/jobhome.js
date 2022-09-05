@@ -24,26 +24,51 @@ export default function JobHome( {jobs, applications, noApps, hasApps, appUsers}
       router.push('/');
     }
 
-   // console.log(session.user.name);
+   
     return (
       <div>
       <NavBar/>
       <div class="mx-auto text-center max-w-3xl px-10">
       
       <h1 class="text-center text-3xl mb-10 font-extrabold tracking-tight text-gray-900 pt-10">
-     Welcome, {session.user.name}
+     Welcome, {session.userName}
           </h1>
-          <h2 class="text-center text-xl mb-10 font-extrabold tracking-tight text-gray-900 pt-10">
+        
+
+<h2 class="text-center text-2xl mb-10 font-bold tracking-tight text-gray-900 pt-10">
+     Jobs You Can Apply For:
+          </h2>
+        	<>
+  
+      {jobs.map((job)=> {
+    return (
+      (noApps.includes(job.id) ||  appUsers[job.id].includes(session.userid)===false) && (job.published) &&  (
+        <div class="mb-10 px-6 pt-2 pb-4 bg-white border border-gray-200 rounded-2xl shadow-md flex flex-col">
+        <p class="mb-3 text-gray-400 text-sm">{job.location}</p>
+  
+        <h3 class="mb-2 text-2xl font-semibold text-gray-900">{job.title}</h3>
+       
+        <Link href={`/job/${job.id}`}>
+        <p class="mt-4 text-teal-500 hover:text-teal-900">APPLY NOW</p>
+        </Link>
+        </div>
+      )
+    )
+    })}
+</>
+   
+
+
+<h2 class="text-center text-2xl mb-10 font-bold tracking-tight text-gray-900 pt-10">
      Job's you've applied for:
           </h2>
-      
+        
       {applications.map((app)=> {
       return (
       app.userId === session.userid &&   
     (	<div class="mb-10 px-6 pt-2 pb-4 bg-white border border-gray-200 rounded-2xl shadow-md flex flex-col">
   
   
-        
         
         <p class="mb-3 text-gray-400 text-sm">{app.job.location}</p>
        
@@ -54,42 +79,9 @@ export default function JobHome( {jobs, applications, noApps, hasApps, appUsers}
         <Link href={app.resumeurl}>
         <p class="mt-2 text-teal-500 hover:text-teal-900">VIEW YOUR APPLICATION</p>
         </Link>
-     
+       
   </div>)
       )})}
-
-<h2 class="text-center text-xl mb-10 font-extrabold tracking-tight text-gray-900 pt-10">
-     Jobs You Can Apply For:
-          </h2>
-      
-          {noApps.map((noapp)=> {
-    return (
-    
-	(	<div class="mb-10 px-6 pt-2 pb-4 bg-white border border-gray-200 rounded-2xl shadow-md flex flex-col">
-
-
-      
-      
-     
-  
-      {jobs.map((job)=> {
-    return (
-      job.id === noapp &&   (
-        <>
-        <p class="mb-3 text-gray-400 text-sm">{job.location}</p>
-  
-        <h3 class="mb-2 text-2xl font-semibold text-gray-900">{job.title}</h3>
-       
-        <Link href={`/job/${job.id}`}>
-        <p class="mt-4 text-teal-500 hover:text-teal-900">APPLY NOW</p>
-        </Link>
-        </>
-      )
-    )})}
-</div>)
-    )})}
-
-
       </div>
         </div>
              
@@ -118,12 +110,13 @@ export async function getServerSideProps() {
   appIds.push(app.jobId);
   })
   
+  
 
    jobIds.forEach((jobId)=>{
     if (!appIds.includes(jobId)){
     noApps.push(jobId);
     } else{
-      hasApps.push( jobId);
+      hasApps.push(jobId);
     }
 
    })
@@ -131,20 +124,14 @@ export async function getServerSideProps() {
    applications.forEach((app)=>{
     if (hasApps.includes(app.jobId)){
       if (Object.hasOwn(appUsers, app.jobId)) {
-       appUsers[app.jobId].append(app.userId)
+       appUsers[app.jobId].push(app.userId)
       } else {
         appUsers[app.jobId]=[app.userId]
       }
     }
    })
 
-   //map jobs 
-   //if jobid in hasApps &&
-   // if session.userId not in appUsers[jobId]
-   //print job
-
-
-   console.log(appUsers);
+  
     return {
       props: { 
         jobs,
