@@ -5,6 +5,7 @@ export const getJob = async (id, prisma) => {
       },
       include: {
         user: true,
+        applications: true
       },
     })
   

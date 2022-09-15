@@ -1,6 +1,7 @@
-import { useSession } from 'next-auth/react';
+import { SessionProvider, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { getJob } from '../api/getJob'
+import { getJob } from '../api/getJob';
+import { getAppsByJobId } from '../api/getAppsByJobId';
 
 import prisma from 'lib/prisma'
 import Link from 'next/link'
@@ -10,7 +11,7 @@ import { signIn } from "next-auth/react";
 import Welcome from 'components/Welcome';
 
 
-export default function Job({ job }) {
+export default function Job({ job, app_users, app_users_ids }) {
     const { data: session, status } = useSession();
     const loading = status === 'loading';
     const router = useRouter();
@@ -28,7 +29,11 @@ export default function Job({ job }) {
         return <Welcome/>
        
       }
-      
+
+
+   
+  
+  
     return (
       <div className='flex flex-col w-1/2 mx-auto'>
         <div className='text-center p-4 m-4'>
@@ -50,10 +55,14 @@ export default function Job({ job }) {
            
               <h4 className='inline text-center'>Posted by {job.user.companyName}</h4>
              
-            {session && session.company === "unknown" ?  <Link href={`/apply/${job.id}`}>
+            {session && session.company === "unknown" ?
+            !app_users.includes(session.userid) ?  <Link href={`/apply/${job.id}`}>
       <p className="mt-4 text-center text-teal-500 hover:text-teal-900">APPLY NOW</p>
-      </Link> :
-
+      </Link> : 
+     <Link href={`/application/${app_users_ids[session.userid] }`}>
+     <p className="mt-4 text-center text-teal-500 hover:text-teal-900">VIEW YOUR APPLICATION</p>
+     </Link>
+      :
       ( session && session.company !== "unknown" ? 
       <div className="mt-10 text-center mx-auto">
       { job.published &&  <a
@@ -119,12 +128,23 @@ export default function Job({ job }) {
 
   
   export async function getServerSideProps(context) {
-    let job = await getJob(context.params.id, prisma)
-    job = JSON.parse(JSON.stringify(job))
-  
+    let job = await getJob(context.params.id, prisma);
+    job = JSON.parse(JSON.stringify(job));
+    let applications = await getJob(job.id, prisma);
+    applications = JSON.parse(JSON.stringify(applications));
+    let app_users=[];
+    let app_users_ids={}
+    applications.applications.forEach((app)=>{
+     
+      app_users.push(app.userId);
+      app_users_ids[app.userId]=app.id
+    })
+
     return {
       props: {
         job,
+        app_users,
+        app_users_ids,
       },
     }
   }

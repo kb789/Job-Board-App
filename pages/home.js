@@ -60,9 +60,10 @@ export default function Home({ jobs, applications }) {
       {applications.map((app)=> {
     return (
       job.id === app.jobId &&   (
-      <Link href={app.resumeurl}>
-      <p class="mt-2 text-teal-500 hover:text-teal-900">{app.lastname}, {app.firstname}</p>
-      </Link>
+   
+      
+     
+      <Link href={`/application/${app.id}`}><p class="mt-2 text-teal-500 hover:text-teal-900">{app.lastname}, {app.firstname}</p></Link>
       )
     )})}
 </div>)

@@ -50,7 +50,8 @@ export default function Home({ jobs }) {
     width={320} height={180}/>
     
     {jobs.map((job)=> {
-    return (
+    return ( 
+      (job.published) &&
 		<div class="mb-10 px-6 pt-2 pb-4 bg-white border border-gray-200 rounded-2xl shadow-md flex flex-col">
       <p class="mb-3 text-gray-400 text-sm">{job.location}</p>
   
@@ -60,6 +61,7 @@ export default function Home({ jobs }) {
       <p class="mt-4 text-teal-500 hover:text-teal-900">APPLY NOW</p>
       </Link>
 </div>
+    
     )})}
 		</div>
       </div>

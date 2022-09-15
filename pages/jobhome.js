@@ -76,9 +76,7 @@ export default function JobHome( {jobs, applications, noApps, hasApps, appUsers}
   
         
        
-        <Link href={app.resumeurl}>
-        <p class="mt-2 text-teal-500 hover:text-teal-900">VIEW YOUR APPLICATION</p>
-        </Link>
+        <Link href={`/application/${app.id}`}>View Your Application</Link>
        
   </div>)
       )})}
