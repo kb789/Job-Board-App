@@ -63,7 +63,7 @@ export default function Job({ job, app_users, app_users_ids }) {
       ( session && session.company !== "unknown" ? 
       <div className="mt-10 text-center mx-auto">
       { job.published &&  <a
-            href='#'
+    
             className='flex items-center w-12  mt-1 text-base font-medium leading-6 text-gray-500 rounded-full hover:bg-color-accent-hover hover:color-accent-hover'
             onClick={async () => {
               const res = await fetch('/api/editJob', {
@@ -88,7 +88,7 @@ export default function Job({ job, app_users, app_users_ids }) {
             Make inactive
           </a> }
       { !job.published && <a
-            href='#'
+            
             className='flex items-center w-12 mt-1 text-base font-medium leading-6 text-gray-500 rounded-full hover:bg-color-accent-hover hover:color-accent-hover'
             onClick={async () => {
               const res = await fetch('/api/editJob', {
