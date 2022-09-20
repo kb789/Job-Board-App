@@ -58,7 +58,7 @@ export default function NewJob() {
 			
 					<div
 						className="w-full h-auto  hidden lg:block lg:w-5/12 bg-cover rounded-l-lg">
-							<Image src={paper}/></div>
+							<Image alt="paper" src={paper}/></div>
 					
 					<div className="w-full lg:w-7/12 bg-white p-5 rounded-lg lg:rounded-l-none">
 						<h3 className="pt-4 text-2xl text-center">Post a job listing!</h3>
