@@ -11,7 +11,7 @@ export default async function handler(req, res) {
 
 const session = await getSession({ req })
 const id = session.userid;
-console.log(req.userName);
+
 
 if (req.body.userName) {
 

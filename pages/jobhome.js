@@ -1,7 +1,7 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import NewJob from 'components/NewJob';
-import NavBar from 'components/NavBar';
+import NavBar from 'components/NavBarJS';
 import Loading from 'components/Loading';
 import { getJobs } from './api/jobs';
 import { getApplications } from './api/applications';
@@ -28,14 +28,14 @@ export default function JobHome( {jobs, applications, noApps, hasApps, appUsers}
     return (
       <div>
       <NavBar/>
-      <div class="mx-auto text-center max-w-3xl px-10">
+      <div className="mx-auto text-center max-w-3xl px-10">
       
-      <h1 class="text-center text-3xl mb-10 font-extrabold tracking-tight text-gray-900 pt-10">
+      <h1 className="text-center text-3xl mb-10 font-extrabold tracking-tight text-gray-900 pt-10">
      Welcome, {session.userName}
           </h1>
         
 
-<h2 class="text-center text-2xl mb-10 font-bold tracking-tight text-gray-900 pt-10">
+<h2 className="text-center text-2xl mb-10 font-bold tracking-tight text-gray-900 pt-10">
      Jobs You Can Apply For:
           </h2>
         	<>
@@ -43,13 +43,13 @@ export default function JobHome( {jobs, applications, noApps, hasApps, appUsers}
       {jobs.map((job)=> {
     return (
       (noApps.includes(job.id) ||  appUsers[job.id].includes(session.userid)===false) && (job.published) &&  (
-        <div class="mb-10 px-6 pt-2 pb-4 bg-white border border-gray-200 rounded-2xl shadow-md flex flex-col">
-        <p class="mb-3 text-gray-400 text-sm">{job.location}</p>
+        <div className="mb-10 px-6 pt-2 pb-4 bg-white border border-gray-200 rounded-2xl shadow-md flex flex-col">
+        <p className="mb-3 text-gray-400 text-sm">{job.location}</p>
   
-        <h3 class="mb-2 text-2xl font-semibold text-gray-900">{job.title}</h3>
+        <h3 className="mb-2 text-2xl font-semibold text-gray-900">{job.title}</h3>
        
         <Link href={`/job/${job.id}`}>
-        <p class="mt-4 text-teal-500 hover:text-teal-900">APPLY NOW</p>
+        <p className="mt-4 text-teal-500 hover:text-teal-900">APPLY NOW</p>
         </Link>
         </div>
       )
@@ -59,24 +59,24 @@ export default function JobHome( {jobs, applications, noApps, hasApps, appUsers}
    
 
 
-<h2 class="text-center text-2xl mb-10 font-bold tracking-tight text-gray-900 pt-10">
-     Job's you've applied for:
+<h2 className="text-center text-2xl mb-10 font-bold tracking-tight text-gray-900 pt-10">
+     Jobs you have applied for:
           </h2>
         
       {applications.map((app)=> {
       return (
       app.userId === session.userid &&   
-    (	<div class="mb-10 px-6 pt-2 pb-4 bg-white border border-gray-200 rounded-2xl shadow-md flex flex-col">
+    (	<div className="mb-10 px-6 pt-2 pb-4 bg-white border border-gray-200 rounded-2xl shadow-md flex flex-col">
   
   
         
-        <p class="mb-3 text-gray-400 text-sm">{app.job.location}</p>
+        <p className="mb-3 text-gray-400 text-sm">{app.job.location}</p>
        
-        <h3 class="mb-1 text-2xl font-semibold text-gray-900">{app.job.title}</h3>
+        <h3 className="mb-1 text-2xl font-semibold text-gray-900">{app.job.title}</h3>
   
         
        
-        <Link href={`/application/${app.id}`}>View Your Application</Link>
+        <Link href={`/application/${app.id}`}><p className="mt-4 text-teal-500 hover:text-teal-900">VIEW YOUR APPLICATION</p></Link>
        
   </div>)
       )})}

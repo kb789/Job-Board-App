@@ -1,6 +1,8 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import Loading from 'components/Loading';
+
 import Image from 'next/image'
 import paper from '/public/paper.jpg'
 
@@ -12,13 +14,14 @@ export default function NewJob() {
 	const [description, setDescription] = useState('');
 	const [location, setLocation] = useState('');
 	const [salary, setSalary] = useState('');
+	const [loading, setLoading] = useState(false)
   
 	if (!session || !session.user) return null;
 
 	const submitJob = async (event) => {
 		
 		event.preventDefault();
-		
+		setLoading(true);
 		const res = await fetch('/api/addJob', {
 		  body: JSON.stringify({
 			title: title,
@@ -34,8 +37,15 @@ export default function NewJob() {
 		
 		router.push('/');
 	  };
-
-
+     
+	  if (loading) {
+		return (
+		 <Loading/>
+		);
+	
+	  }
+	
+ 
     return (
       
       
@@ -78,7 +88,7 @@ export default function NewJob() {
             onChange={(e) => setDescription(e.target.value)}
           />
 							</div>
-							<div className="mb-4 md:flex md:justify-between">
+							<div className="mb-10 md:flex md:justify-between">
 								<div className="mb-4 md:mr-2 md:mb-0">
 									<label className="block mb-2 text-sm font-bold text-gray-700">
 										Location
@@ -105,18 +115,8 @@ export default function NewJob() {
 								</div>
 							</div>
 							
-							<div className="mb-10">
-                            <label className="block mb-2 text-sm font-bold text-gray-700">
-										Make active?
-									</label>
-									<input
-										className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-										name="active"
-										type="text"
-										placeholder="Make Job Description Active?"
-									/>
-							</div>
-							<div className="mb-6 text-center">
+							
+							<div className="mb-6 mt-10 pt-10 text-center">
 								<button
 									className="w-full px-4 py-2 font-bold text-white bg-slate-400 rounded-full hover:bg-slate-600 focus:outline-none focus:shadow-outline"
 									type="submit"

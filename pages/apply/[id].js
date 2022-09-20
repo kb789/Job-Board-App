@@ -3,10 +3,13 @@ import prisma from 'lib/prisma';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { SessionProvider, useSession } from 'next-auth/react';
 import Loading from 'components/Loading';
+
 
 export default function Apply({job}) {
   const router = useRouter();
+  const { data: session, status } = useSession();
     const [pdf, setPdf] = useState('');
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
@@ -14,6 +17,12 @@ export default function Apply({job}) {
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
     const [loading, setLoading] = useState(false)
+
+
+    if (!session) {
+      router.push('/');
+    }
+
     const uploadPhoto = async (event) => {
       event.preventDefault();
       setLoading(true);
@@ -57,7 +66,8 @@ export default function Apply({job}) {
         //setLoading(false);
         router.push("/");
       } else {
-        console.error('Upload failed.');
+        //console.error('Upload failed.');
+        return res.status(501).end()
       }
      
     };

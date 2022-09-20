@@ -25,37 +25,38 @@ export default function Home({ jobs, applications }) {
     if (!session) {
       router.push('/');
     }
-    console.log(applications)
-
+    
     return (
      
       <div>
     <NavBar/>
-    <div class="mx-auto text-center max-w-3xl px-10">
+    <div className="mx-auto text-center max-w-3xl px-10">
     
-    <h1 class="text-center text-3xl mb-10 font-extrabold tracking-tight text-gray-900 pt-10">
+    <h1 className="text-center text-3xl mb-10 font-extrabold tracking-tight text-gray-900 pt-10">
    Welcome, {session.company}
         </h1>
-        <h2 class="text-center text-2xl mb-10 font-bold tracking-tight text-gray-900 pt-10">
-          Jobs's You've Posted
+        <h2 className="text-center text-2xl mb-10 font-bold tracking-tight text-gray-900 pt-10">
+          Jobs You Have Posted
         </h2>
     
     {jobs.map((job)=> {
     return (
     job.userId === session.userid &&   
-	(	<div class="mb-10 px-6 pt-2 pb-4 bg-white border border-gray-200 rounded-2xl shadow-md flex flex-col">
+	(	<div className="mb-10 px-6 pt-2 pb-4 bg-white border border-gray-200 rounded-2xl shadow-md flex flex-col">
 
 
-      
-      
-      <p class="mb-3 text-gray-400 text-sm">{job.location}</p>
+    
+      <p className="mb-3 text-gray-400 text-sm">{job.location}</p>
      
-      <h3 class="mb-1 text-2xl font-semibold text-gray-900">{job.title}</h3>
-
+      <h3 className="mb-3 text-2xl font-semibold text-gray-900">{job.title}</h3>
+      {job.published ? 
+      <div className="text-yellow-400 mb-5"><span className="text-black">Status:</span> ACTIVE</div>
+       : <div className="text-gray-400 mb-5"><span className="text-black">Status:</span> INACTIVE</div> }
+      
       <Link href={`/job/${job.id}`}>
-      <p class="mt-1 text-teal-500 hover:text-teal-900">View job</p>
+      <p className="underline mt-1 text-teal-500 hover:text-teal-900">Edit job</p>
       </Link>
-      <p class="mt-8 text-gray-600 text-md">APPLICANTS:</p>
+      <p className="mt-6 text-gray-600 text-md">APPLICANTS:</p>
   
       {applications.map((app)=> {
     return (
@@ -63,7 +64,7 @@ export default function Home({ jobs, applications }) {
    
       
      
-      <Link href={`/application/${app.id}`}><p class="mt-2 text-teal-500 hover:text-teal-900">{app.lastname}, {app.firstname}</p></Link>
+      <Link href={`/application/${app.id}`}><p className="mt-2 text-teal-500 hover:text-teal-900">{app.lastname}, {app.firstname}</p></Link>
       )
     )})}
 </div>)
@@ -84,7 +85,7 @@ export async function getServerSideProps() {
   let jobs = JSON.parse(JSON.stringify(init_jobs));
 
   let init_applications = await getApplications(prisma);
-  console.log(init_applications)
+
   let applications = JSON.parse(JSON.stringify(init_applications));
  
     return {

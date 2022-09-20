@@ -14,7 +14,7 @@ model Job {
   id       Int    @id @default(autoincrement())
   title String
   description    String 
-  published  Boolean    @default(true)
+  published  Boolean    @default(false)
   createdAt  DateTime   @default(now())
   location String
   salary String

@@ -52,7 +52,7 @@ export default function Application({ application }) {
             <p className='text-xl font-semibold text-gray-900 mb-8'>{application.email}</p>
             <p className='text-xl font-semibold text-gray-900 mb-8'>{application.job.title}</p>
             <Link href={application.resumeurl}>
-        <p class="mt-2 text-teal-500 hover:text-teal-900">RESUME</p>
+        <p className="text-center mt-2 text-teal-500 hover:text-teal-900">RESUME</p>
         </Link>
           
     </div>

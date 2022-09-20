@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     }
    
   const session = await getSession( {req});
-  console.log(session.userid)
+ 
 
     if (req.method === 'POST') {
       await prisma.job.create({
