@@ -26,6 +26,7 @@ const userid = session.userid;
       return
     }
 
+    try {
     const updateJob = await prisma.job.update({
         where: {
           id: id,
@@ -34,6 +35,9 @@ const userid = session.userid;
           published: req.body.status,
         },
       })
+    } catch (e) {
+     console.log(e);
+    }
     } 
     res.end()
   return;
