@@ -66,8 +66,8 @@ export default function Apply({job}) {
         //setLoading(false);
         router.push("/");
       } else {
-        //console.error('Upload failed.');
-        return res.status(501).end()
+        console.error('Upload failed.');
+       
       }
      
     };
