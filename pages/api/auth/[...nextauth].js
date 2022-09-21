@@ -22,33 +22,8 @@ export default NextAuth({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET
   }),
-  TwitterProvider({
-    clientId: process.env.TWITTER_ID,
-    clientSecret: process.env.TWITTER_SECRET,
-    version: "2.0", 
-    authorization: {
-      url: "https://twitter.com/i/oauth2/authorize",
-      params: {
-        scope: "users.read tweet.read offline.access like.read list.read",
-      },
-    },
-  }),
-  EmailProvider({
-    server: {
-       host: process.env.EMAIL_SERVER_HOST,
-       port: process.env.EMAIL_SERVER_PORT,
-       auth: {
-        user: process.env.MAIL_USERNAME,
-        pass: process.env.MAIL_PASSWORD,
-        type: 'OAuth2',
-        clientId: process.env.OAUTH_CLIENTID,
-        clientSecret: process.env.OAUTH_CLIENT_SECRET,
-        refreshToken: process.env.OAUTH_REFRESH_TOKEN
-       },
-    },
-    from: process.env.EMAIL_FROM,
-    
- }),
+  
+  
   ],
   database: process.env.DATABASE_URL,
   secret: process.env.SECRET,
