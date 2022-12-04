@@ -11,12 +11,7 @@ The Job Board App allows users to create accounts as either job posters or job s
 
 ## Technologies Used
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). It uses a Postgres database hosted on Supabase, modeled using the Prisma ORM.
-
-
-
-
-
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). It uses a Postgres database hosted on Supabase, modeled using the Prisma ORM. Authentication is managed using NextAuth.js, allowing users to login using either their Github or Google accounts. Uploaded resumes are hosted on Google Cloud Storage. 
 
 
 ## Getting Started
